@@ -1,0 +1,9 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: Example.aux
+The style file: abbrv.bst
+I found no \citation commands---while reading file Example.aux
+Database file #1: References.bib
+I was expecting a `,' or a `}'---line 43 of file References.bib
+ :   title = A 
+ :             Mathematical Model for a Distributed Attack on Targeted Resources in a Computer Network},
+I'm skipping whatever remains of this entry
+(There were 2 error messages)

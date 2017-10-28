@@ -1,0 +1,584 @@
+\ProvidesPackage{Macros}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%PACOTES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\usepackage{cancel} 	%para o comando cancelto
+\usepackage{color,soul} %para o highlight
+\usepackage{amssymb} 	%para o cqd
+
+\sethlcolor{yellow}
+
+\usepackage{enumerate}
+
+
+\usepackage[T1]{fontenc}
+\usepackage{calligra}  %para escrita caligráfica \calligra
+\usepackage{bigints}   %para símbolos de integral grandes
+
+
+\usepackage{graphicx}
+\graphicspath{{./figuras/}}             % caminho das figuras (recomendável)
+\usepackage{wrapfig}	%Para figuras aninhadas no texto
+
+%Para bold de math
+\usepackage{bm}
+
+
+\DeclareSymbolFont{bbold}{U}{bbold}{m}{n}
+\DeclareSymbolFontAlphabet{\mathbbold}{bbold}
+
+
+
+\usepackage{units}  %Fracoes pequenas
+
+
+
+\usepackage{amsfonts}
+\usepackage{xparse}
+\usepackage{ifthen}
+\usepackage{forloop}
+
+\usepackage{animate}
+%\animategraphics[scale=0.65]{2}{N=0075-K=5.00-NET=0-G=0.50-E=096-}{20}{40}
+
+%http://www.texample.net/tikz/examples/beamer-arrows/
+\usepackage{tikz}                %Para setas do beamer
+\usetikzlibrary{arrows,shapes}
+\tikzstyle{every picture}+=[remember picture]
+\tikzstyle{na} = [baseline=-.5ex]
+
+
+% Mostra números de equações referenciadas
+%\mathtoolsset{showonlyrefs}
+
+
+\usepackage{blindtext} %Para lorem ipsum
+
+% Para highlight de código em fortran
+\usepackage{xcolor}
+\usepackage{lmodern}
+\usepackage{listings}
+\lstset{language=[90]Fortran,
+  basicstyle=\ttfamily,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  morecomment=[l]{!\ }% Comment only with space after !
+}
+
+%\newcommand{\refitem}[1]{{(\ref{#1})}}
+%\renewcommand{\refeq}[1]{{\rm (\ref{#1})}}
+%\newcommand{\reft}[1]{{\rm \ref{#1}}}
+
+\usepackage{algorithm}
+
+%Para pseudo-código em português
+\usepackage{algpseudocode}
+% Declaracoes em Português
+
+\algrenewcommand{\algorithmicrequire}{\textbf{Entradas:}}
+\algrenewcommand{\algorithmicensure}{\textbf{Saídas:}}
+
+\algrenewcommand\algorithmicend{\textbf{Fim}}
+\algrenewcommand\algorithmicdo{\textbf{Faça}}
+\algrenewcommand\algorithmicwhile{\textbf{Enquanto}}
+\algrenewcommand\algorithmicfor{\textbf{Para}}
+\algrenewcommand\algorithmicif{\textbf{Se}}
+\algrenewcommand\algorithmicthen{\textbf{Então}}
+\algrenewcommand\algorithmicelse{\textbf{Senão}}
+\algrenewcommand\algorithmicreturn{\textbf{Devolve}}
+\algrenewcommand\algorithmicfunction{\textbf{Função}}
+\algrenewcommand\algorithmicforall{\textbf{Para Todo}}
+
+\algnewcommand{\algorithmicgoto}{\textbf{Vá para}}%
+\algnewcommand{\Goto}[1]{\algorithmicgoto~\ref{#1}}%
+
+% Rearranja os finais de cada estrutura
+\algrenewtext{EndWhile}{\algorithmicend\ \algorithmicwhile}
+\algrenewtext{EndFor}{\algorithmicend\ \algorithmicfor}
+\algrenewtext{EndIf}{\algorithmicend\ \algorithmicif}
+\algrenewtext{EndFunction}{\algorithmicend\ \algorithmicfunction}
+
+% O comando For, a seguir, retorna 'para #1 -- #2 até #3 faça'
+\algnewcommand\algorithmicto{\textbf{até}}
+\algrenewtext{For}[3]%
+{\algorithmicfor\ #1 $\gets$ #2 \algorithmicto\ #3 \algorithmicdo}
+
+\renewcommand{\ALG@name}{Algoritmo}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%ATALHOS DE SÍMBOLOS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\newcommand{\NN}{  \mathbb{N} }   % Natural numbers
+	\newcommand{\RR}{  \mathbb{R} }   % Real numbers
+	\newcommand{\CC}{  \mathbb{C} }   % Complex numbers
+	\newcommand{\EE}{  \mathbb{E} }   % Fiel (R or C)
+	\newcommand{\ZZ}{  \mathbb{Z} } % Integers
+	\newcommand{\QQ}{  \mathbb{Q} } % Racionais
+	\newcommand{\TT}{  \mathbb{T} } % Toro
+	\newcommand{\ii}{  \mathbbold{i} \hspace{0.04cm} } % i complexo
+	\newcommand{\oneone}{  \mathbbold{1} \hspace{0.04cm} } % i complexo
+	\newcommand{\jj}{  \mathbbold{jj} \hspace{0.04cm} } % j complexo..
+
+	\DeclareMathOperator{\proj}{proj}
+	\DeclareMathOperator{\D}{D}
+
+	\DeclareMathOperator{\QR}{QR}
+	\DeclareMathOperator{\rank}{rank}
+	\DeclareMathOperator{\posto}{posto}
+	\DeclareMathOperator{\dist}{dist}
+	\DeclareMathOperator{\inc}{inc}
+	\DeclareMathOperator{\cond}{cond}
+	\DeclareMathOperator{\diag}{diag}
+	\DeclareMathOperator{\im}{im}
+	\DeclareMathOperator{\sen}{sen}
+	\DeclareMathOperator{\arcsen}{arcsen}
+	\DeclareMathOperator{\grad}{grad}
+	\DeclareMathOperator{\Hz}{Hz}
+	\DeclareMathOperator{\supp}{supp}
+
+
+
+\renewcommand\Re{\operatorname{Re}}
+\renewcommand\Im{\operatorname{Im}}
+
+
+
+  	\newcommand{\modulo}{\!\! \mod}
+
+
+	\newcommand\eps{\varepsilon}
+	\newcommand\vphi{\varphi}
+
+
+	\newcommand\Sum{\sum\limits}
+	\newcommand\Lim{\lim\limits}
+	\newcommand\Limsup{\limsup\limits}
+	\newcommand\Liminf{\liminf\limits}
+	\newcommand\Sup{\sup\limits}
+	\newcommand\Prod{\prod}
+
+	\newcommand\U{\mathcal{U}}
+	\newcommand\V{\mathcal{V}}
+	\newcommand\W{\mathcal{W}}
+	\newcommand\Z{\mathcal{Z}}
+
+
+	\newcommand{\ie}{\emph{i.e.},\mbox{ }}  % i.e.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%ATALHOS DE COMANDOS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+	\newcommand\cc{{\cellcolor[gray]{0.8}}}
+	\newcommand\noi{\noindent}
+
+	\NewDocumentCommand\aspas{m}{``#1''}
+	\NewDocumentCommand\red{m}{{\color{red} #1}}
+	\NewDocumentCommand\blue{m}{{\color{blue} #1}}
+	\newcommand{\tq}{  \mid } % Tal que
+	\renewcommand{\;}{;\quad}
+	\NewDocumentCommand\cur{m}{{\calligra #1}}
+	\newcommand{\w}{  \omega } % atalho para omega
+	\newcommand{\Frac}{  \dfrac } % fração grand
+
+
+\NewDocumentCommand\conj{m}{{#1}^{\hspace{-0.02cm}*} \hspace{0.03cm}}
+
+
+
+
+
+	%Atalho para parêntesis
+
+	% vazio parêntesis
+	% * nada
+	% 0 parêntesis
+	% 1 colchete
+	% 2 chave
+	% |  barra
+	% || barra dupla
+	\NewDocumentCommand\C{om}
+	{\!
+		\IfNoValueTF{#1}{\left(#2\right)}                       %Somente parêntesis
+			{
+		\ifthenelse{\equal{#1}{*}}{   #2   }{}
+		\ifthenelse{\equal{#1}{**}}{   #2   }{}
+		\ifthenelse{\equal{#1}{0}}{\left(   #2   \right)}{}
+		\ifthenelse{\equal{#1}{00}}{\left(   #2   \right)}{}
+		\ifthenelse{\equal{#1}{0*}}{\left(   #2   \right.}{}
+		\ifthenelse{\equal{#1}{*0}}{\left.   #2   \right)}{}
+		\ifthenelse{\equal{#1}{1}}{\left[   #2   \right]}{}
+		\ifthenelse{\equal{#1}{11}}{\left[   #2   \right]}{}
+		\ifthenelse{\equal{#1}{1*}}{\left[   #2   \right.}{}
+		\ifthenelse{\equal{#1}{*1}}{\left.   #2   \right]}{}
+		\ifthenelse{\equal{#1}{01}}{\left(   #2   \right]}{}
+		\ifthenelse{\equal{#1}{10}}{\left[   #2   \right)}{}
+		\ifthenelse{\equal{#1}{2}}{\left\{   #2   \right\}}{}
+		\ifthenelse{\equal{#1}{22}}{\left\{   #2   \right\}}{}
+		\ifthenelse{\equal{#1}{2*}}{\left\{   #2   \right.}{}
+		\ifthenelse{\equal{#1}{*2}}{\left.    #2   \right\}}{}
+		\ifthenelse{\equal{#1}{3}}{\left|   #2   \right| }{}
+		\ifthenelse{\equal{#1}{|}}{\left|   #2   \right| }{}
+		\ifthenelse{\equal{#1}{4}}{\left\|   #2   \right\| }{}
+		\ifthenelse{\equal{#1}{||}}{\left\|   #2   \right\| }{}
+		\ifthenelse{\equal{#1}{<}}{ \hspace{0.04cm} \langle  #2   \rangle }{}
+		\ifthenelse{\equal{#1}{20}}{\left\{   #2   \right.}{}
+%pois sempre confundo..
+			}
+	}
+
+
+
+	\NewDocumentCommand\abs{m}{\C[3]{#1}}
+	\NewDocumentCommand\norm{m}{\C[4]{#1}}
+	\NewDocumentCommand\norma{m}{\C[4]{#1}}
+	\NewDocumentCommand\nnorma{m}{\C[||]{#1}}
+	\NewDocumentCommand\nnorm{m}{\C[||]{#1}}
+
+
+	%Atalho para derivada parcial com frac,
+	% \pd<k>{f}{x}[x_0] será a derivada parcial de ordem k da função f em relação x, calculada em x_0
+	% \pd* coloca a derivada parcial como operador, o ponto de avaliação de x_0 também é opcional
+	\NewDocumentCommand\pd{sD<>{}mmo}
+	{
+	  \IfNoValueTF{#5}
+	  {
+		\IfBooleanTF#1
+		{\frac{ \partial^{#2}   } {\partial#4} #3 }
+		{\frac{ \partial^{#2}  #3 } {\partial#4} }
+	  }
+	  {
+		\IfBooleanTF#1
+		{\left. \frac{ \partial^{#2}   } {\partial#4} #3   \right|_{#5}  }
+		{\frac{ \partial^{#2}  #3 } {\partial#4}  \left(  #5  \right)  }
+	  }
+	}
+
+	%Atalho para derivada parcial em uma linha: del f / del x
+	\NewDocumentCommand\pdl{D<>{}mm}
+	{
+		\partial^{#1}  #2 / \partial #3
+	}
+
+
+	%Atalho para derivada simples em uma linha: d f / d x
+	\NewDocumentCommand\ddl{D<>{}mD<>{t}}
+	{
+		\mathrm{d}^{#1}  #2 / \mathrm{d} #3
+	}
+
+	%Atalho para derivada de uma variável,
+	% \dd<k>{f}[x][x_0] será a diferencial de ordem k da função f em relação x, calculada em x_0
+	% \dd* coloca a derivada parcial como operador, o ponto de avaliação de x_0 também é opcional
+	% se [x] não é dado, utiliza t como padrão
+	\NewDocumentCommand\dd{sD<>{}mO{t}o}
+	{
+		\IfBooleanTF#1 %Se tem estrela, coloca a função do lado de fora da fração
+		{
+			\IfNoValueTF{#5}
+			{\frac{\mathrm{d}^{#2}      }{\mathrm{d}{#4}^{#2}}  #3}
+			{\left.   \frac{\mathrm{d}^{#2}      }{\mathrm{d}{#4}^{#2}}  #3  \right|_{#5}  }
+		}
+		{
+			\IfNoValueTF{#5}
+			{\frac{\mathrm{d}^{#2}  #3    }{\mathrm{d}{#4}^{#2}}  }
+			{\frac{\mathrm{d}^{#2}  #3   }{\mathrm{d}{#4}^{#2}}  \left(  #5 \right)  }
+		}
+	}
+
+
+	%Atalho para derivada de uma variável,
+	% \Dd<k>{f}[x][x_0] será a diferencial de ordem k da função f em relação x, calculada em x_0
+	% \Dd* coloca a derivada parcial como operador, o ponto de avaliação de x_0 também é opcional
+	% se [x] não é dado, utiliza t como padrão
+	\NewDocumentCommand\Dd{sD<>{}mO{t}o}
+	{
+		\IfBooleanTF#1 %Se tem estrela, coloca a função do lado de fora da fração
+		{
+			\IfNoValueTF{#5}
+			{\Frac{\mathrm{d}^{#2}      }{\mathrm{d}{#4}^{#2}}  #3}
+			{\left.   \Frac{\mathrm{d}^{#2}      }{\mathrm{d}{#4}^{#2}}  #3  \right|_{#5}  }
+		}
+		{
+			\IfNoValueTF{#5}
+			{\Frac{\mathrm{d}^{#2}  #3    }{\mathrm{d}{#4}^{#2}}  }
+			{\Frac{\mathrm{d}^{#2}  #3   }{\mathrm{d}{#4}^{#2}}  \left(  #5 \right)  }
+		}
+	}
+
+
+
+	%Atalho para integral
+	% $\Int[a][b]{f(x)}{x}$
+	\NewDocumentCommand\Int{D<>{0}O{}O{}mm}
+	{
+		\ifthenelse{\equal{#1}{0}}{  {\displaystyle\int_{#2}^{#3}{ \! #4 }\, \mathrm{d} #5}    }{}
+		\ifthenelse{\equal{#1}{1}}{  {\int_{#2}^{#3}{ \! #4 }\, \mathrm{d} #5}    }{}
+		\ifthenelse{\equal{#1}{2}}{  {\bigintssss_{#2}^{#3}{ \! #4 }\, \mathrm{d} #5}    }{}
+		\ifthenelse{\equal{#1}{3}}{  {\bigintsss_{#2}^{#3}{ \! #4 }\, \mathrm{d} #5}    }{}
+		\ifthenelse{\equal{#1}{4}}{  {\bigintss_{#2}^{#3}{ \!\! #4 }\, \mathrm{d} #5}    }{}
+		\ifthenelse{\equal{#1}{5}}{  {\bigints_{#2}^{#3}{ \!\!\! #4 }\, \mathrm{d} #5}    }{}
+		\ifthenelse{\equal{#1}{6}}{  {\bigint_{#2}^{#3}{ \!\!\!\! #4 }\, \mathrm{d} #5}    }{}
+	}
+
+	\NewDocumentCommand\matriz{m}
+	{
+  \begin{pmatrix}
+	#1
+	\end{pmatrix}
+	}
+
+
+	\NewDocumentCommand\Det{m}
+  {
+    \begin{vmatrix}
+      #1
+    \end{vmatrix}
+  }
+
+
+
+	\NewDocumentCommand\rcl{m}
+	{
+		\begin{array}{rclclclclclclclcl}
+		#1
+		\end{array}
+	}
+
+	\NewDocumentCommand\lcl{m}
+	{
+		\begin{array}{lclclclclclclclclc}
+		#1
+		\end{array}
+	}
+
+	\NewDocumentCommand\llll{m}
+  {
+    \begin{array}{llllllllllllllllll}
+      #1
+    \end{array}
+  }
+
+
+	\NewDocumentCommand\crcl{m}
+	{
+		\begin{array}{crcl}
+		#1
+		\end{array}
+	}
+
+	\NewDocumentCommand\implicacoes{m}
+	{
+		\begin{array}{crclclclcl}
+		#1
+		\end{array}
+	}
+
+
+
+
+	% Sequências
+	% $\s{V}[m] = V1, ...., Vm$
+	% \s*{m} = {1, ..., m}
+	\NewDocumentCommand{\s}{sD<>{1}mD<>{1}o}{
+		\IfNoValueTF{#5}
+		{
+			\IfBooleanTF#1
+			{\C[2]{#2, \ldots, #3}}
+			{#2, \ldots, #3}
+		}
+		{
+			\IfBooleanTF#1
+			{\C[2]{  #3_{#4} , \ldots, #3_{#5}}}
+			{ #3_{#4} , \ldots, #3_{#5}}
+		}
+	}
+
+
+
+	\NewDocumentCommand{\Sen}{o}{\IfNoValueTF{#1}{\sen}{\sen\!\C{ #1}}}
+	\NewDocumentCommand{\Cos}{o}{\IfNoValueTF{#1}{\cos}{\cos\!\C{ #1}}}
+	\NewDocumentCommand{\Exp}{o}{\IfNoValueTF{#1}{\exp}{\exp\!\C{ #1}}}
+
+
+	\NewDocumentCommand{\ra}{o}
+	{  \rightarrow }
+
+	\NewDocumentCommand{\Ra}{o}
+	{\IfNoValueTF{#1}{\Rightarrow}{\xRightarrow{#1}}}
+
+
+	\NewDocumentCommand{\Implica}{o}
+	{\IfNoValueTF{#1}{\Rightarrow}{\xRightarrow{#1}}}
+
+	\NewDocumentCommand{\equivale}{o}
+	{\IfNoValueTF{#1}{\Leftrightarrow}{\xRightarrow{#1}}}
+
+	\NewDocumentCommand{\eq}{o}
+	{\IfNoValueTF{#1}{\Leftrightarrow}{\xRightarrow{#1}}}
+
+
+	\NewDocumentCommand{\LRa}{o}
+	{\IfNoValueTF{#1}{\Leftrightarrow}{\xRightarrow{#1}}}
+
+
+	\renewcommand{\bold}{\textbf }
+
+	\newcommand\raiz[1]{ \sqrt{ #1}}
+
+%Barra grande sobre math
+\newcommand*\bigbar[1]{%
+  \vbox{%
+    \hrule height 0.5pt%                  % Line above with certain width
+    \kern0.25ex%                          % Distance between line and content
+    \hbox{%
+      \kern-0.1em%                        % Distance between content and left side of box, negative values for lines shorter than content
+      \ifmmode#1\else\ensuremath{#1}\fi%  % The content, typeset in dependence of mode
+      \kern-0.1em%                        % Distance between content and left side of box, negative values for lines shorter than content
+    }% end of hbox
+  }% end of vbox
+}
+
+\newcommand\ab{\bm{a}}
+\newcommand\bb{\bm{b}}
+
+
+\newcommand\wb{\bm{w}}
+\newcommand\xb{\bm{x}}
+\newcommand\yb{\bm{y}}
+\newcommand\Fb{\bm{F}}
+\newcommand\Gb{\bm{G}}
+\newcommand\Hb{\bm{H}}
+\newcommand\Eb{\bm{E}}
+\newcommand\oneb{\bm{1}}
+\newcommand\Phib{\bm{\Phi}}
+\newcommand\thetab{\bm{\theta}}
+\newcommand\Thetab{\bm{\Theta}}
+\newcommand\vphib{\bm{\vphi}}
+\newcommand\etab{\bm{\eta}}
+
+\newcommand\Mb{\bm{M}}
+
+\newcommand\mC{\mathcal{C}}
+\newcommand\mF{\mathcal{F}}
+\newcommand\mK{\mathcal{K}}
+\newcommand\mD{\mathcal{D}}
+\newcommand\mH{\mathcal{H}}
+\newcommand\mU{\mathcal{U}}
+\newcommand\mV{\mathcal{V}}
+\newcommand\mA{\mathcal{A}}
+\newcommand\ml{\ell}
+
+	\NewDocumentCommand{\figura}{D<>{0.6}mo}{
+		\begin{figure}[!ht]
+		  \centering
+		  \includegraphics[scale=#1]{#2}
+		  \IfNoValueTF{#3}
+          {}
+		  {\caption{#3}}
+		\end{figure}
+	}
+
+	\NewDocumentCommand{\wfigura}{D<>{1.0}mo}{
+		\begin{wrapfigure}{r}{0.5\textwidth}
+		  \begin{center}
+		  \includegraphics[scale=#1]{#2}
+		  \end{center}
+		  \IfNoValueTF{#3}
+          {}
+		  {\caption{#3}}
+		\end{wrapfigure}
+	}
+
+
+
+% Cria Nó de Seta
+\NewDocumentCommand{\n}{moo} {
+	\IfNoValueTF{#2}
+	{\tikz[na]\node[coordinate](#1){};\!\!\!\!\!}
+	{
+		\IfNoValueTF{#3}
+		{\tikz[baseline]{\node[anchor=base] (#1){#2};}\!\!}
+		{\tikz[baseline]{\node[#3, anchor=base] (#1){#2};}\!\!}
+	}
+}
+
+%
+%\seta[n1][t1][bend left]
+\NewDocumentCommand{\seta}{mmo}{
+	\IfNoValueTF{#3}
+	{
+		\begin{tikzpicture}[overlay]
+		        \path[->](#1) edge (#2);
+		\end{tikzpicture}
+	}
+	{
+		\begin{tikzpicture}[overlay]
+		        \path[->](#1) edge [#3] (#2);
+		\end{tikzpicture}
+	}
+}
+
+
+% Equações com display e rcl
+\NewDocumentCommand{\E}{D<>{}m}{
+	\IfNoValueTF{#1}
+	{
+		\[
+		\rcl{#2}
+		\]
+	}
+	{
+	\begin{equation} \label{#1}
+	\rcl{#2}
+	\end{equation}
+	}
+}
+
+
+%\node[fill=red!20, ellipse, anchor=base]
+%\node[fill=green!20,anchor=base]
+%\node[fill=blue!20,anchor=base]
+%[bend left]
+%[bend right]
+%[out=0, in=-90]
+
+
+\newcommand{\refeq}[1]{{\rm (\ref{#1})}}
+
+
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{problem}[theorem]{Problem}
+
+% Use specific symbols for itens
+\usepackage{hyperref}
+\newcounter{desccount}
+\newcommand{\descitem}[1]{%
+  \item[#1] \refstepcounter{desccount}\label{#1}
+}
+\newcommand{\descref}[1]{\hyperref[#1]{#1}}
+
+\usepackage{blindtext}
+
+\usepackage{changepage}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
