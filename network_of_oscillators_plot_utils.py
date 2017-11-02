@@ -81,16 +81,19 @@ def get_color_from_list(i, color = plt.rcParams['axes.prop_cycle'].by_key()['col
     return color[np.mod(i, len(color))]
 
 
-def plot_phase_minus_psi(t, theta, psi, tlim = None,
-                         shift_axis = False, 
-                         color = plt.rcParams['axes.prop_cycle'].by_key()['color'],
-                         sel = None,
-                         show_right_ax_labels = True,
-                         ax=None):
+def plot_phase_mod_2pi(t, theta, psi = None, tlim = None,
+                       shift_axis = False, 
+                       color = plt.rcParams['axes.prop_cycle'].by_key()['color'],
+                       sel = None,
+                       show_right_ax_labels = True,
+                       ax=None):
     if ax is None:
         ax = plt.gca()
 
     n = np.shape(theta)[1]
+    
+    if psi is None:
+        psi = np.zeros(len(t))
     
     if tlim is None:
         t_indexes = range(len(t))
@@ -160,15 +163,18 @@ def generate_array_density_histogram(theta, psi, i, bins=51, s=0.2):
     return array
 
 
-def plot_phase_minus_psi_histogram(theta, psi, bins=51, shift_axis=False,
-                                   color=plt.rcParams['axes.prop_cycle'].by_key()['color'],
-                                   show_right_ax_labels = True,
-                                   sel=None,
-                                   ax=None):
+def plot_phase_mod_2pi_histogram(theta, psi=None, bins=51, shift_axis=False, 
+                                 color=plt.rcParams['axes.prop_cycle'].by_key()['color'],
+                                 show_right_ax_labels = True,
+                                 sel=None,
+                                 ax=None):
     if ax is None:
         ax = plt.gca()
 
     n = np.shape(theta)[1]
+
+    if psi is None:
+        psi = np.zeros(np.shape(theta)[0])
 
     if sel is None:
         sel_color = range(n)
