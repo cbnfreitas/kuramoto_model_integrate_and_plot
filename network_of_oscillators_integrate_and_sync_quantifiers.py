@@ -110,13 +110,11 @@ def partial_sync(theta, psi, h=0.01, s=0.2):
     raise Exception('error')
 
 
-def integrate_and_measure(kuramoto, theta0, tf = 300, h=0.01, s=0.2):
+def integrate_and_measure(kuramoto, theta0, tf=300, h=0.01, s=0.2):
     #Integrate network and compute some synchronization quantifiers
     #s is the percentage of transiente discarded to evalutate these quantifiers.
     
-    t = arange_(0, tf, h)
-    theta = odeint(kuramoto, theta0, t, hmax=h)
-
+    t, theta = kuramoto.integrate(theta0, tf=tf, h=h)
     r, psi = order_parameter(theta)
 
     #Evaluate synchronization quantifiers

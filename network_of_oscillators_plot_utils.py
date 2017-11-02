@@ -34,7 +34,6 @@ def plot_coupling_graph(E, w, ax=None):
     if ax is None:
         ax = plt.gca()
 
-    ax = plt.gca()
     ax.set_xticks([])
     ax.set_yticks([])
     ax.plot([0, 0], [1,1], linewidth = None)
