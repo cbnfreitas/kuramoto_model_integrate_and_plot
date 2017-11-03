@@ -87,13 +87,41 @@ def plot_phase_mod_2pi(t, theta, psi = None, tlim = None,
                        sel = None,
                        show_right_ax_labels = True,
                        ax=None):
+    """ Plot phase variables mod 2pi
+
+    Parameters
+    ----------
+    t : ndarray
+        Instant of time
+    theta : ndarray of shape (len(t), N)
+        Phase variables at each instant of time
+    psi : ndarray of shape (len(t))
+        If provided, plot the difference between phase and psi
+    tlim : ndarray of shape (2)
+        Interval of time
+    shift_axis : boolean
+        If True, plot each phase on its own axis.
+    color :
+        Colors to plot each trajectory
+    sel :
+        Select only some oscillators to plot
+    show_right_ax_labels
+    ax
+
+    Returns
+    -------
+
+    """
     if ax is None:
         ax = plt.gca()
 
     n = np.shape(theta)[1]
     
     if psi is None:
+        plot_label_psi = False
         psi = np.zeros(len(t))
+    else:
+        plot_label_psi = True
     
     if tlim is None:
         t_indexes = range(len(t))
@@ -148,13 +176,16 @@ def plot_phase_mod_2pi(t, theta, psi = None, tlim = None,
                 linewidth=0.5)
 
     ax.set_xlabel(r'$t$')
-    ax.set_ylabel(r'$(\theta_i - \psi - \pi)/2\pi$')
+    if plot_label_psi:
+        ax.set_ylabel(r'$(\theta_i - \psi - \pi)/2\pi$')
+    else:
+        ax.set_ylabel(r'$(\theta_i - \pi)/2\pi$')
 
     return ax
 
 
-def generate_array_density_histogram(theta, psi, i, bins=51, s=0.2):
-    aux_theta = np.mod(chop(theta[:, i] - psi - np.pi, s, 1), 2 * np.pi)
+def generate_array_density_histogram(theta, psi, i, bins=51, discard_transient=0.2):
+    aux_theta = np.mod(chop(theta[:, i] - psi - np.pi, discard_transient, 1), 2 * np.pi)
     results, edges = np.histogram(aux_theta, bins=np.linspace(0, 2 * np.pi, bins), normed=True)
     binWidth = edges[1] - edges[0]
 
@@ -163,18 +194,28 @@ def generate_array_density_histogram(theta, psi, i, bins=51, s=0.2):
     return array
 
 
-def plot_phase_mod_2pi_histogram(theta, psi=None, bins=51, shift_axis=False, 
+def plot_phase_mod_2pi_histogram(theta, psi=None, bins=51, discard_transient = 0.2,
+                                 shift_axis=False, 
                                  color=plt.rcParams['axes.prop_cycle'].by_key()['color'],
                                  show_right_ax_labels = True,
                                  sel=None,
                                  ax=None):
+    """ Similar to plot_phase_mod_2pi, plotting the histogram. 
+        The unit circle is divided into bins and discard_transient controls the percentage of transient
+        to be discarded at the begining of the time series.
+    """
+    
     if ax is None:
         ax = plt.gca()
 
     n = np.shape(theta)[1]
 
     if psi is None:
+        plot_label_psi = False
         psi = np.zeros(np.shape(theta)[0])
+    else:
+        plot_label_psi = True
+            
 
     if sel is None:
         sel_color = range(n)
@@ -215,7 +256,8 @@ def plot_phase_mod_2pi_histogram(theta, psi=None, bins=51, shift_axis=False,
         ax.plot([0, 1], [0, 1], alpha=0)
 
     for i in range(len(sel)):
-        array = generate_array_density_histogram(theta, psi, sel[i], bins=bins + 1)
+        array = generate_array_density_histogram(theta, psi, sel[i], 
+                                                 discard_transient = discard_transient, bins=bins + 1)
 
         for j in range(bins):
             if array[j] > 0:
@@ -238,7 +280,10 @@ def plot_phase_mod_2pi_histogram(theta, psi=None, bins=51, shift_axis=False,
             ax.plot([0.97, 1], [i + 1, i + 1], color='black', linewidth=0.25, zorder=1)
 
     ax.set_ylabel(r'density')
-    ax.set_xlabel(r'$(\theta_i - \psi - \pi)/2\pi$')
+    if plot_label_psi:
+        ax.set_xlabel(r'$(\theta_i - \psi - \pi)/2\pi$')
+    else:
+        ax.set_xlabel(r'$(\theta_i - \pi)/2\pi$')
 
     return ax
 

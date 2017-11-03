@@ -103,7 +103,7 @@ class KuramotoModel:
         if self.tau == 0:
             theta = odeint(self, theta0, t, hmax=h)
         else:
-            theta0_hist = lambda t: theta0 - t * self.w
+            theta0_hist = lambda t: theta0 + t * self.w
             theta = ddeint(self, theta0_hist, t)
 
         return t, theta
