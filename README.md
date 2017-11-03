@@ -10,6 +10,6 @@ The Kuramoto vector field is defined in network_of_oscillators_Kuramoto_model.py
 
 We require several Python 3 packages (numpy, scipy, matplotlib, etc). https://anaconda.org/anaconda/python contains everything we need.
 
-TODO: unit tests, complete documentation (shame on me!) and check convergency order of odeint and ddeint.
+TODO: unit tests, complete documentation.
 
 
